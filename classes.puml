@@ -1,0 +1,1695 @@
+@startuml classes
+set namespaceSeparator none
+class "AmdGPU" as glances.plugins.gpu.cards.amd.AmdGPU {
+  device_folders : list
+  drm_root_folder : str
+  {abstract}exit()
+  get_device_stats()
+}
+class "Amp" as glances.amps.default.Amp {
+  AUTHOR : str
+  DESCRIPTION : str
+  EMAIL : str
+  NAME : str
+  VERSION : str
+  update(process_list)
+}
+class "Amp" as glances.amps.nginx.Amp {
+  AUTHOR : str
+  DESCRIPTION : str
+  EMAIL : str
+  NAME : str
+  VERSION : str
+  update(process_list)
+}
+class "Amp" as glances.amps.systemd.Amp {
+  AUTHOR : str
+  DESCRIPTION : str
+  EMAIL : str
+  NAME : str
+  VERSION : str
+  update(process_list)
+}
+class "Amp" as glances.amps.systemv.Amp {
+  AUTHOR : str
+  DESCRIPTION : str
+  EMAIL : str
+  NAME : str
+  VERSION : str
+  update(process_list)
+}
+class "AmpsList" as glances.amps_list.AmpsList {
+  args
+  config
+  get()
+  getList()
+  load_configs()
+  set(new_dict)
+  update()
+}
+class "AutoDiscovered" as glances.autodiscover.AutoDiscovered {
+  add_server(name, ip, port)
+  get_servers_list()
+  remove_server(name)
+  set_server(server_pos, key, value)
+}
+class "Bar" as glances.outputs.glances_bars.Bar {
+  max_value : int
+  min_value : int
+  percent
+  post_char
+  pre_char
+  size
+  get(overlay: str)
+}
+class "Config" as glances.config.Config {
+  config_dir : NoneType
+  config_filename : str
+  loaded_config_file
+  parser : ConfigParser
+  re_pattern
+  as_dict()
+  config_file_paths()
+  get_bool_value(section, option, default)
+  get_float_value(section, option, default)
+  get_int_value(section, option, default)
+  get_list_value(section, option, default, separator)
+  get_value(section, option, default)
+  has_section(section)
+  items(section)
+  read()
+  sections()
+  sections_set_default()
+  set_default(section, option, default)
+  set_default_cwc(section, option_header, cwc)
+}
+class "ContainersExtension" as glances.plugins.containers.engines.ContainersExtension {
+  {abstract}stop() -> None
+  {abstract}update(all_tag) -> Tuple[Dict, List[Dict[str, Any]]]
+}
+class "Counter" as glances.timer.Counter {
+  target : datetime
+  get()
+  reset()
+  start()
+}
+class "CpuInfo" as glances.cpu_percent.CpuInfo {
+  cpu_hz : Optional[float]
+  cpu_hz_current : Optional[float]
+  cpu_name : str
+}
+class "CpuPercent" as glances.cpu_percent.CpuPercent {
+  cached_timer_cpu : int
+  cached_timer_cpu_info : int
+  cpu_info
+  cpu_percent : float, list
+  percpu_percent
+  timer_cpu
+  timer_cpu_info
+  timer_percpu
+  get_cpu() -> float
+  get_info() -> CpuInfo
+  get_key()
+  get_percpu() -> List[PerCpuPercentInfo]
+}
+class "DockerExtension" as glances.plugins.containers.engines.docker.DockerExtension {
+  CONTAINER_ACTIVE_STATUS : list
+  client : DockerClient, NoneType
+  ext_name : str
+  key
+  stats_fetchers : dict
+  connect() -> None
+  generate_stats(container) -> Dict[str, Any]
+  stop() -> None
+  update(all_tag) -> Tuple[Dict, List[Dict]]
+  update_version()
+}
+class "DockerStatsFetcher" as glances.plugins.containers.engines.docker.DockerStatsFetcher {
+  MANDATORY_MEMORY_FIELDS : list
+  activity_stats
+  time_since_update
+  stop()
+}
+class "Export" as glances.exports.glances_cassandra.Export {
+  cluster
+  export_enable : bool
+  keyspace : NoneType
+  password : NoneType
+  protocol_version : int
+  replication_factor : int
+  session
+  table : NoneType
+  username : NoneType
+  exit()
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_couchdb.Export {
+  client : NoneType
+  export_enable : bool
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_csv.Export {
+  csv_file
+  csv_filename
+  export_enable : bool
+  first_line : bool
+  old_header : NoneType
+  writer
+  exit()
+  {abstract}export(name, columns, points)
+  update(stats)
+}
+class "Export" as glances.exports.glances_elasticsearch.Export {
+  client : NoneType
+  export_enable : bool
+  index : NoneType
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_graph.Export {
+  export_enable : bool
+  generate_every : int
+  height : int
+  path
+  style
+  width : int
+  exit()
+  export(title, data)
+  update(stats)
+}
+class "Export" as glances.exports.glances_graphite.Export {
+  client : NoneType
+  debug : bool
+  export_enable : bool
+  port : int
+  prefix : NoneType, str
+  system_name : NoneType
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_influxdb.Export {
+  client : NoneType
+  db : NoneType
+  export_enable : bool
+  hostname : NoneType
+  password : NoneType
+  prefix : NoneType
+  protocol : str
+  tags : NoneType
+  user : NoneType
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_influxdb2.Export {
+  bucket : NoneType
+  client : NoneType
+  export_enable : bool
+  hostname : NoneType
+  interval : NoneType, int
+  org : NoneType
+  prefix : NoneType
+  protocol : str
+  tags : NoneType
+  token : NoneType
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_json.Export {
+  buffer : dict
+  export_enable : bool
+  json_file
+  json_filename
+  exit()
+  export(name, columns, points)
+}
+class "Export" as glances.exports.glances_kafka.Export {
+  client : NoneType
+  compression : NoneType
+  export_enable : bool
+  tags : NoneType
+  topic : NoneType
+  exit()
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_mongodb.Export {
+  client : NoneType
+  db : NoneType
+  export_enable : bool
+  password : NoneType
+  user : NoneType
+  database()
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_mqtt.Export {
+  callback_api_version
+  client : NoneType
+  devicename
+  export_enable : bool
+  password : NoneType
+  port
+  tls : str
+  topic : NoneType, str
+  topic_structure
+  user : NoneType, str
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_opentsdb.Export {
+  client : NoneType
+  export_enable : bool
+  prefix : NoneType, str
+  tags : NoneType
+  exit()
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_prometheus.Export {
+  METRIC_SEPARATOR : str
+  export_enable : bool
+  labels : str
+  prefix : str
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_rabbitmq.Export {
+  client : NoneType
+  export_enable : bool
+  hostname
+  password : NoneType
+  protocol : NoneType, str
+  queue : NoneType
+  user : NoneType
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_restful.Export {
+  buffer : dict
+  client : NoneType, str
+  export_enable : bool
+  path : NoneType
+  protocol : NoneType
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_riemann.Export {
+  client : NoneType
+  export_enable : bool
+  hostname
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_statsd.Export {
+  client : NoneType
+  export_enable : bool
+  prefix : NoneType, str
+  export(name, columns, points)
+  init()
+}
+class "Export" as glances.exports.glances_zeromq.Export {
+  client : NoneType, Socket
+  context : Context, NoneType
+  export_enable : bool
+  prefix : NoneType
+  exit()
+  export(name, columns, points)
+  init()
+}
+class "FolderList" as glances.folder_list.FolderList {
+  config
+  first_grab : bool
+  timer_folders : list
+  careful(item)
+  critical(item)
+  get()
+  getAll()
+  path(item)
+  set(new_list)
+  setAll(new_list)
+  update(key)
+  warning(item)
+}
+class "GlancesActions" as glances.actions.GlancesActions {
+  start_timer
+  status : dict
+  get(stat_name)
+  run(stat_name, criticality, commands, repeat, mustache_dict)
+  set(stat_name, criticality)
+}
+class "GlancesAmp" as glances.amps.amp.GlancesAmp {
+  AUTHOR : str
+  DESCRIPTION : str
+  EMAIL : str
+  NAME : str
+  VERSION : str
+  amp_name : str
+  args : NoneType
+  configs : dict
+  timer
+  count()
+  count_max()
+  count_min()
+  enable()
+  get(key)
+  load_config(config)
+  one_line()
+  refresh()
+  regex()
+  result()
+  set_count(count)
+  set_result(result, separator)
+  should_update()
+  time_until_refresh()
+  update_wrapper(process_list)
+}
+class "GlancesAttribute" as glances.attribute.GlancesAttribute {
+  description
+  history
+  name
+  value
+  history_add(value)
+  history_json(nb)
+  history_len()
+  history_mean(nb)
+  history_raw(nb)
+  history_reset()
+  history_size()
+  history_value(pos)
+}
+class "GlancesAutoDiscoverClient" as glances.autodiscover.GlancesAutoDiscoverClient {
+  info
+  zeroconf
+  close()
+  find_active_ip_address()
+}
+class "GlancesAutoDiscoverListener" as glances.autodiscover.GlancesAutoDiscoverListener {
+  servers
+  add_service(zeroconf, srv_type, srv_name)
+  get_servers_list()
+  remove_service(zeroconf, srv_type, srv_name)
+  set_server(server_pos, key, value)
+}
+class "GlancesAutoDiscoverServer" as glances.autodiscover.GlancesAutoDiscoverServer {
+  browser
+  listener
+  zeroconf
+  zeroconf_enable_tag : bool
+  close()
+  get_servers_list()
+  set_server(server_pos, key, value)
+}
+class "GlancesClient" as glances.client.GlancesClient {
+  args : NoneType
+  client : ServerProxy
+  client_mode
+  config : NoneType
+  quiet
+  refresh_time
+  return_to_browser : bool
+  screen
+  stats
+  uri : str
+  end()
+  log_and_exit(msg)
+  login()
+  serve_forever()
+  update()
+  update_glances()
+  update_snmp()
+}
+class "GlancesClientBrowser" as glances.client_browser.GlancesClientBrowser {
+  args : NoneType
+  autodiscover_server : NoneType
+  config : NoneType
+  password : NoneType
+  screen
+  static_server : NoneType
+  end()
+  get_servers_list()
+  load()
+  serve_forever()
+  set_in_selected(key, value)
+}
+class "GlancesClientTransport" as glances.client.GlancesClientTransport {
+  timeout
+  set_timeout(timeout)
+}
+class "GlancesColors" as glances.outputs.glances_colors.GlancesColors {
+  A_BOLD : int
+  CAREFUL : int
+  CAREFUL_LOG : int
+  CPU_TIME : int
+  CRITICAL : int
+  CRITICAL_LOG : int
+  DEFAULT : int
+  FILTER : int
+  INFO : int
+  NICE : int
+  OK : int
+  OK_LOG : int
+  SELECTED : int
+  SEPARATOR : int
+  WARNING : int
+  WARNING_LOG : int
+  args
+  get() -> dict
+}
+class "GlancesCursesBrowser" as glances.outputs.glances_curses_browser.GlancesCursesBrowser {
+  active_server
+  cursor
+  cursor_position : int
+  first_scan : bool
+  is_end : bool
+  pressedkey
+  cursor_down(stats)
+  cursor_pagedown(stats)
+  cursor_pageup(stats)
+  cursor_up(stats)
+  display(stats, cs_status)
+  flush(stats)
+  get_pagelines(stats)
+  update(stats, duration, cs_status, return_to_browser)
+}
+class "GlancesCursesClient" as glances.outputs.glances_curses.GlancesCursesClient {
+}
+class "GlancesCursesStandalone" as glances.outputs.glances_curses.GlancesCursesStandalone {
+}
+class "GlancesEvent" as glances.event.GlancesEvent {
+  avg : float
+  begin : int
+  count : int
+  desc : str
+  end : int
+  global_msg : str
+  max : float
+  min : float
+  sort : str
+  state : str
+  sum : float
+  top : list
+  type : str
+  is_finished()
+  is_ongoing()
+  update(state: str, value: float, sort_key: str, proc_list: list, proc_desc: str, global_msg: str)
+}
+class "GlancesEventsList" as glances.events_list.GlancesEventsList {
+  events_list : list
+  max_events
+  min_duration
+  min_interval
+  add(event_state, event_type, event_value, proc_list, proc_desc)
+  clean(critical)
+  get()
+  get_event_sort_key(event_type)
+  len()
+  reset_process_sort()
+  set_max_events(max_events)
+  set_min_duration(min_duration)
+  set_min_interval(min_interval)
+  set_process_sort(event_type)
+}
+class "GlancesExport" as glances.exports.export.GlancesExport {
+  args : NoneType
+  config : NoneType
+  export_enable : bool
+  export_name : str
+  host : NoneType
+  non_exportable_plugins : list
+  port : NoneType
+  build_export(stats)
+  exit()
+  {abstract}export(name, columns, points)
+  get_item_key(item)
+  last_exported_list()
+  load_conf(section, mandatories, options)
+  parse_tags(tags)
+  plugins_to_export(stats)
+  update(stats)
+}
+class "GlancesFilter" as glances.filter.GlancesFilter {
+  filter
+  filter_input
+  filter_key
+  filter_re
+  is_filtered(process)
+}
+class "GlancesFilterList" as glances.filter.GlancesFilterList {
+  filter
+  is_filtered(process)
+}
+class "GlancesGrabBat" as glances.plugins.sensors.sensor.glances_batpercent.GlancesGrabBat {
+  bat : NoneType
+  bat_list : list
+  battery_percent
+  get()
+  update()
+}
+class "GlancesGrabHDDTemp" as glances.plugins.sensors.sensor.glances_hddtemp.GlancesGrabHDDTemp {
+  args : NoneType
+  cache : bytes, str
+  hddtemp_list : list
+  host : str
+  port : int
+  fetch()
+  get()
+  reset()
+}
+class "GlancesGrabSensors" as glances.plugins.sensors.GlancesGrabSensors {
+  init : bool
+  sensor_type : Literal[SensorType.FAN_SPEED, SensorType.CPU_TEMP]
+  sensor_unit : str
+  update() -> List[dict]
+}
+class "GlancesHistory" as glances.history.GlancesHistory {
+  stats_history : dict
+  add(key, value, description, history_max_size)
+  get(nb)
+  get_json(nb)
+  reset()
+}
+class "GlancesIRQ" as glances.plugins.irq.GlancesIRQ {
+  IRQ_FILE : str
+  cpu_number : int
+  lasts : dict
+  stats : list
+  get()
+  get_key()
+  reset()
+}
+class "GlancesInstance" as glances.server.GlancesInstance {
+  cached_time
+  stats
+  timer
+  getAll()
+  getAllLimits()
+  getAllPlugins()
+  getAllViews()
+  getPlugin(plugin)
+  getPluginView(plugin)
+  init()
+}
+class "GlancesJSONResponse" as glances.outputs.glances_restful_api.GlancesJSONResponse {
+  render(content: Any) -> bytes
+}
+class "GlancesMain" as glances.main.GlancesMain {
+  DEFAULT_REFRESH_TIME : int
+  args : Namespace, NoneType
+  cached_time : int
+  client_tag : bool
+  config
+  example_of_use : str
+  password : str
+  server_port : int
+  username : str
+  web_server_port : int
+  check_mode_compatibility()
+  get_args()
+  get_config()
+  get_mode()
+  init_args()
+  init_client_server(args)
+  init_debug(args)
+  init_plugins(args)
+  init_refresh_rate(args)
+  init_ui_mode(args)
+  is_client()
+  is_client_browser()
+  is_server()
+  is_standalone()
+  is_webserver()
+  parse_args()
+  version_msg()
+}
+class "GlancesPassword" as glances.password.GlancesPassword {
+  config : NoneType
+  password_dir
+  password_file
+  password_filename : str
+  username : str
+  check_password(hashed_password, plain_password)
+  get_hash(plain_password, salt)
+  get_password(description, confirm, clear)
+  hash_password(plain_password)
+  load_password()
+  local_password_path()
+  save_password(hashed_password)
+}
+class "GlancesPasswordList" as glances.password_list.GlancesPasswordList {
+  get_password(host)
+  load(config)
+  set_password(host, password)
+}
+class "GlancesPluginModel" as glances.plugins.plugin.model.GlancesPluginModel {
+  actions
+  alias : dict
+  align
+  args : NoneType
+  fields_description : NoneType
+  hide_zero : bool
+  hide_zero_fields : list
+  input_method
+  items_history_list : NoneType
+  limits
+  plugin_name
+  refresh_timer
+  short_system_name
+  stats : NoneType
+  stats_history
+  stats_init_value : dict
+  stats_previous : NoneType
+  time_since_last_update : NoneType
+  views : dict
+  auto_unit(number, low_precision, min_symbol, none_symbol)
+  curse_add_line(msg, decoration, optional, additional, splittable)
+  curse_add_stat(key, width, header, display_key, separator, trailer)
+  curse_new_line()
+  exit()
+  filter_stats(stats)
+  get_alert(current, minimum, maximum, highlight_zero, is_max, header, action_key, log)
+  get_alert_log(current, minimum, maximum, header, action_key)
+  get_conf_value(value, header, plugin_name, default)
+  get_export()
+  get_export_history(item)
+  get_init_value()
+  get_item_info(item, key, default)
+  get_items_history_list()
+  get_json()
+  get_json_views(item, key, option)
+  get_key()
+  get_limit(criticality, stat_name)
+  get_limit_action(criticality, stat_name)
+  get_limit_log(stat_name, default_action)
+  get_limits(item)
+  get_raw()
+  get_raw_history(item, nb)
+  get_raw_stats_item(item)
+  get_raw_stats_value(item, value)
+  get_refresh()
+  get_refresh_time()
+  get_stat_name(header)
+  get_stats()
+  get_stats_action()
+  get_stats_display(args, max_width)
+  get_stats_history(item, nb)
+  get_stats_item(item)
+  get_stats_snmp(bulk, snmp_oid)
+  get_stats_value(item, value)
+  get_trend(item, nb)
+  get_views(item, key, option)
+  has_alias(header)
+  history_enable()
+  init_stats_history()
+  is_disabled(plugin_name)
+  is_display(value, header)
+  is_enabled(plugin_name)
+  is_hide(value, header)
+  is_limit(criticality, stat_name)
+  is_show(value, header)
+  load_limits(config)
+  manage_action(stat_name, trigger, header, action_key)
+  manage_threshold(stat_name, trigger)
+  msg_curse(args, max_width)
+  read_alias()
+  reset()
+  reset_stats_history()
+  reset_views()
+  set_limits(item, value)
+  set_refresh(value)
+  set_stats(input_stats)
+  set_views(input_views)
+  sorted_stats()
+  trend_msg(trend, significant)
+  update_stats_history()
+  update_views()
+}
+class "GlancesPortsList" as glances.ports_list.GlancesPortsList {
+  get_ports_list()
+  load(config)
+  set_server(pos, key, value)
+}
+class "GlancesProcesses" as glances.processes.GlancesProcesses {
+  args : NoneType
+  auto_sort : NoneType, bool
+  cache_timeout : int
+  cache_timer
+  disable_extended_tag : bool
+  disable_gids : bool
+  disable_io_counters : bool
+  disable_tag : bool
+  export_process_filter
+  extended_process : NoneType, dict
+  io_old : dict
+  max_processes
+  no_kernel_threads : bool
+  pid_max
+  process_filter
+  process_filter_input
+  process_filter_key
+  process_filter_re
+  processcount : dict
+  processes_count
+  processlist : list
+  processlist_cache : dict
+  processlist_export : list
+  sort_key
+  sort_reverse
+  disable()
+  disable_extended()
+  disable_kernel_threads()
+  enable()
+  enable_extended()
+  get_count()
+  get_export()
+  get_extended_stats(proc)
+  get_list(sorted_by, as_programs)
+  get_max_values(key)
+  is_selected_extended_process(position)
+  kill(pid, timeout)
+  max_values()
+  nice_decrease(pid)
+  nice_increase(pid)
+  reset_internal_cache()
+  reset_max_values()
+  reset_processcount()
+  set_args(args)
+  set_max_values(key, value)
+  set_sort_key(key, auto)
+  update()
+  update_export_list(processlist)
+  update_list(processlist)
+  update_processcount(plist)
+}
+class "GlancesRestfulApi" as glances.outputs.glances_restful_api.GlancesRestfulApi {
+  API_VERSION : str
+  STATIC_PATH
+  TEMPLATE_PATH
+  args : NoneType
+  bind_url : str
+  config : NoneType
+  plugins_list
+  stats : NoneType
+  timer
+  url_prefix : str
+  uvicorn_server : NoneType
+  authentication(creds: Annotated[HTTPBasicCredentials, Depends(security)])
+  end()
+  load_config(config)
+  start(stats: GlancesStats) -> None
+}
+class "GlancesSNMPClient" as glances.snmp.GlancesSNMPClient {
+  auth : str
+  cmdGen
+  community : str
+  host : str
+  port : int
+  user : str
+  version : str
+  get_by_oid()
+  getbulk_by_oid(non_repeaters, max_repetitions)
+}
+class "GlancesServer" as glances.server.GlancesServer {
+  args : NoneType
+  autodiscover_client
+  server
+  add_user(username, password)
+  end()
+  serve_forever()
+}
+class "GlancesStandalone" as glances.standalone.GlancesStandalone {
+  args : NoneType
+  config : NoneType
+  outdated
+  quiet
+  refresh_time
+  screen
+  stats
+  display_modules_list()
+  end()
+  serve_forever()
+  serve_issue()
+  serve_n(n)
+}
+class "GlancesStaticServer" as glances.static_list.GlancesStaticServer {
+  get_servers_list()
+  load(config)
+  set_server(server_pos, key, value)
+}
+class "GlancesStats" as glances.stats.GlancesStats {
+  args : NoneType
+  config : NoneType
+  first_export : bool
+  header : str
+  end()
+  export(input_stats)
+  getAll()
+  getAllAsDict(plugin_list)
+  getAllExports(plugin_list)
+  getAllExportsAsDict(plugin_list)
+  getAllLimits(plugin_list)
+  getAllLimitsAsDict(plugin_list)
+  getAllViews(plugin_list)
+  getAllViewsAsDict(plugin_list)
+  getExportsList(enable)
+  getPluginsList(enable)
+  get_plugin(plugin_name)
+  get_plugin_view(plugin_name)
+  load_additional_plugins(args, config)
+  load_exports(args)
+  load_limits(config)
+  load_modules(args)
+  load_plugins(args)
+  update()
+}
+class "GlancesStatsClient" as glances.stats_client.GlancesStatsClient {
+  args : NoneType
+  config : NoneType
+  set_plugins(input_plugins)
+  update(input_stats)
+}
+class "GlancesStatsClientSNMP" as glances.stats_client_snmp.GlancesStatsClientSNMP {
+  args : NoneType
+  config : NoneType
+  os_name : NoneType
+  system_name : NoneType
+  check_snmp()
+  get_system_name(oid_system_name)
+  update()
+}
+class "GlancesStatsServer" as glances.stats_server.GlancesStatsServer {
+  all_stats : defaultdict
+  getAll()
+  update(input_stats)
+}
+class "GlancesStdout" as glances.outputs.glances_stdout.GlancesStdout {
+  args : NoneType
+  config : NoneType
+  plugins_list : list
+  build_list()
+  {abstract}end()
+  update(stats, duration)
+}
+class "GlancesStdoutApiDoc" as glances.outputs.glances_stdout_apidoc.GlancesStdoutApiDoc {
+  args : NoneType
+  config : NoneType
+  {abstract}end()
+  update(stats, duration)
+}
+class "GlancesStdoutCsv" as glances.outputs.glances_stdout_csv.GlancesStdoutCsv {
+  args : NoneType
+  config : NoneType
+  header : bool
+  na : str
+  plugins_list : list
+  separator : str
+  build_data(plugin, attribute, stat)
+  build_header(plugin, attribute, stat)
+  build_list()
+  {abstract}end()
+  update(stats, duration)
+}
+class "GlancesStdoutIssue" as glances.outputs.glances_stdout_issue.GlancesStdoutIssue {
+  args : NoneType
+  config : NoneType
+  {abstract}end()
+  print_issue(plugin, result, message)
+  print_version()
+  update(stats, duration)
+}
+class "GlancesStdoutJson" as glances.outputs.glances_stdout_json.GlancesStdoutJson {
+  args : NoneType
+  config : NoneType
+  plugins_list
+  build_list()
+  {abstract}end()
+  update(stats, duration)
+}
+class "GlancesTextbox" as glances.outputs.glances_curses.GlancesTextbox {
+  do_command(ch)
+}
+class "GlancesTextboxYesNo" as glances.outputs.glances_curses.GlancesTextboxYesNo {
+  do_command(ch)
+}
+class "GlancesThresholdCareful" as glances.thresholds.GlancesThresholdCareful {
+}
+class "GlancesThresholdCritical" as glances.thresholds.GlancesThresholdCritical {
+}
+class "GlancesThresholdOk" as glances.thresholds.GlancesThresholdOk {
+}
+class "GlancesThresholdWarning" as glances.thresholds.GlancesThresholdWarning {
+}
+class "GlancesThresholds" as glances.thresholds.GlancesThresholds {
+  current_module
+  threshold_list : list
+  add(stat_name, threshold_description)
+  get(stat_name)
+}
+class "GlancesUvicornServer" as glances.outputs.glances_restful_api.GlancesUvicornServer {
+  should_exit : bool
+  {abstract}install_signal_handlers()
+  run_in_thread(timeout)
+}
+class "GlancesWebList" as glances.web_list.GlancesWebList {
+  get_web_list()
+  load(config)
+  set_server(pos, key, value)
+}
+class "GlancesWebServer" as glances.webserver.GlancesWebServer {
+  stats
+  web
+  end()
+  serve_forever()
+}
+class "GlancesXMLRPCHandler" as glances.server.GlancesXMLRPCHandler {
+  rpc_paths : tuple
+  authenticate(headers)
+  check_user(username, password)
+  end_headers()
+  {abstract}log_message(log_format)
+  parse_request()
+  send_my_headers()
+}
+class "GlancesXMLRPCServer" as glances.server.GlancesXMLRPCServer {
+  address_family
+  bind_address
+  bind_port : int
+  config : NoneType
+  finished : bool
+  isAuth : bool
+  user_dict : dict
+  end()
+  serve_forever()
+}
+class "NvidiaGPU" as glances.plugins.gpu.cards.nvidia.NvidiaGPU {
+  device_handles : list
+  exit()
+  get_device_stats()
+}
+class "Outdated" as glances.outdated.Outdated {
+  args
+  cache_dir
+  cache_file
+  config
+  data : dict
+  get_pypi_version()
+  installed_version()
+  is_outdated()
+  latest_version()
+  load_config(config)
+  refresh_date()
+}
+class "PerCpuPercentInfo" as glances.cpu_percent.PerCpuPercentInfo {
+  cpu_number : int
+  dpc : Optional[float]
+  guest : Optional[float]
+  guest_nice : Optional[float]
+  idle : float
+  interrupt : Optional[float]
+  iowait : Optional[float]
+  irq : Optional[float]
+  key : str
+  nice : Optional[float]
+  softirq : Optional[float]
+  steal : Optional[float]
+  system : float
+  total : float
+  user : float
+}
+class "PluginModel" as glances.plugins.alert.PluginModel {
+  align : str
+  display_curse : bool
+  stats
+  add_duration(ret, alert)
+  add_infos(ret, alert)
+  add_min_mean_max(ret, alert)
+  add_new_line(ret, alert)
+  add_start_time(ret, alert)
+  add_top_proc(ret, alert)
+  approx_equal(a, b, tolerance)
+  build_hdr_msg(ret)
+  loop_over_alert(init, alert)
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.amps.PluginModel {
+  args : NoneType
+  config : NoneType
+  display_curse : bool
+  glances_amps
+  stats
+  get_alert(nbprocess, countmin, countmax, header, log)
+  get_key()
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.cloud.PluginModel {
+  OPENSTACK
+  OPENSTACKEC2
+  display_curse : bool
+  stats : dict
+  exit()
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.connections.PluginModel {
+  conntrack : dict
+  display_curse : bool
+  initiated_states : list
+  stats
+  status_list : list
+  terminated_states : list
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.containers.PluginModel {
+  args : NoneType
+  config : NoneType
+  display_curse : bool
+  sort_key : NoneType, str
+  stats
+  watchers : Dict[str, ContainersExtension]
+  add_msg_to_line(ret, msg)
+  build_cmd_line(ret, container)
+  build_container_data(name_max_width, args)
+  build_container_name(name_max_width)
+  build_cpu_line(ret, container)
+  build_data_line(name_max_width, args)
+  build_header(ret, name_max_width)
+  build_io_line(ret, container)
+  build_memory_line(ret, container)
+  build_net_line(args)
+  build_status_name(ret, container)
+  build_title(ret)
+  build_uptime_line(ret, container)
+  container_alert(status: str) -> str
+  exit() -> None
+  get_export() -> List[Dict]
+  get_key() -> str
+  get_max_of_container_names()
+  maybe_add_engine_name_or_pod_line(ret)
+  maybe_add_engine_name_or_pod_name(ret, container)
+  memory_usage_no_cache(mem: Dict[str, float]) -> float
+  msg_curse(args, max_width: Optional[int]) -> List[str]
+  update() -> List[Dict]
+  update_views() -> bool
+}
+class "PluginModel" as glances.plugins.core.PluginModel {
+  display_curse : bool
+  stats
+  update()
+}
+class "PluginModel" as glances.plugins.cpu.PluginModel {
+  display_curse : bool
+  nb_log_core : int
+  stats : NoneType, dict
+  msg_curse(args, max_width)
+  update()
+  update_local()
+  update_snmp()
+  update_views()
+}
+class "PluginModel" as glances.plugins.diskio.PluginModel {
+  display_curse : bool
+  hide_zero : bool
+  hide_zero_fields : list
+  stats
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_local()
+  update_views()
+}
+class "PluginModel" as glances.plugins.folders.PluginModel {
+  args : NoneType
+  config : NoneType
+  display_curse : bool
+  glances_folders
+  stats : list
+  get_alert(stat, header)
+  get_key()
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.fs.PluginModel {
+  display_curse : bool
+  stats
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_local()
+  update_snmp()
+  update_views()
+}
+class "PluginModel" as glances.plugins.gpu.PluginModel {
+  amd
+  display_curse : bool
+  nvidia
+  stats
+  exit()
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.help.PluginModel {
+  args : NoneType
+  config : NoneType
+  display_curse : bool
+  view_data : dict
+  generate_view_data()
+  get_view_data(args)
+  msg_curse(args, max_width)
+  {abstract}reset()
+  {abstract}update()
+}
+class "PluginModel" as glances.plugins.ip.PluginModel {
+  display_curse : bool
+  public_address : str
+  public_address_refresh_interval : int
+  public_api
+  public_disabled
+  public_field : list
+  public_info : NoneType, str
+  public_password
+  public_template
+  public_username
+  stats
+  ip_to_cidr(ip)
+  msg_curse(args, max_width)
+  public_info_for_human(public_info)
+  update()
+}
+class "PluginModel" as glances.plugins.irq.PluginModel {
+  display_curse : bool
+  irq
+  stats
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.load.PluginModel {
+  display_curse : bool
+  stats : dict
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.mem.PluginModel {
+  display_curse : bool
+  stats : dict
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.memswap.PluginModel {
+  display_curse : bool
+  stats : dict
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.network.PluginModel {
+  display_curse : bool
+  hide_no_ip
+  hide_no_up
+  hide_zero : bool
+  hide_zero_fields : list
+  stats : NoneType
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_local()
+  update_views()
+}
+class "PluginModel" as glances.plugins.now.PluginModel {
+  align : str
+  display_curse : bool
+  stats
+  strftime
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.percpu.PluginModel {
+  display_curse : bool
+  max_cpu_display : int
+  stats
+  define_headers_from_os()
+  display_cpu_header_in_columns(cpu, return_)
+  display_cpu_stats_in_columns(cpu, header, return_)
+  display_cpu_stats_per_line(header, return_)
+  get_key()
+  manage_max_cpu_to_display()
+  maybe_build_string_msg(header, return_)
+  msg_curse(args, max_width)
+  summarize_all_cpus_not_displayed(percpu_list, header, return_)
+  update()
+}
+class "PluginModel" as glances.plugins.ports.PluginModel {
+  args : NoneType
+  config : NoneType
+  display_curse : bool
+  stats : list
+  exit()
+  get_key()
+  get_ports_alert(port, header, log)
+  get_web_alert(web, header, log)
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.processcount.PluginModel {
+  display_curse : bool
+  stats : dict
+  disable_extended()
+  enable_extended()
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.processlist.PluginModel {
+  display_curse : bool
+  layout_header : dict
+  layout_stat : dict
+  max_values : dict
+  mmm_max : dict
+  mmm_min : dict
+  nb_log_core : int
+  pid_max : NoneType, int
+  stats : list
+  tag_proc_time : bool
+  add_cpu_line(ret, prog)
+  add_io_and_network_lines(ret, prog)
+  add_ionice_line(headers, default)
+  add_memory_info_lines(ret, prog)
+  add_memory_line(ret, prog)
+  add_title_line(ret, prog)
+  get_export()
+  get_headers(k)
+  get_key()
+  get_nice_alert(value)
+  get_process_curses_data(p, selected, args)
+  is_selected_process(args)
+  maybe_add_cpu_affinity_line(ret, prog)
+  maybe_add_ionice_line(ret, prog)
+  maybe_add_memory_swap_line(ret, prog)
+  msg_curse(args, max_width)
+  update()
+  update_local()
+}
+class "PluginModel" as glances.plugins.psutilversion.PluginModel {
+  stats : NoneType, str
+  reset()
+  update()
+}
+class "PluginModel" as glances.plugins.quicklook.PluginModel {
+  AVAILABLE_STATS_LIST : list
+  DEFAULT_STATS_LIST : list
+  display_curse : bool
+  max_cpu_display : int
+  stats
+  stats_list : list
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.raid.PluginModel {
+  display_curse : bool
+  stats
+  msg_curse(args, max_width)
+  raid_alert(status, used, available, raid_type) -> str
+  update()
+}
+class "PluginModel" as glances.plugins.sensors.PluginModel {
+  display_curse : bool
+  sensors_grab_map : Dict[SensorType, Any]
+  stats
+  battery_trend(stats)
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PluginModel" as glances.plugins.sensors.sensor.glances_batpercent.PluginModel {
+  display_curse : bool
+  glances_grab_bat
+  stats : list
+  update()
+}
+class "PluginModel" as glances.plugins.sensors.sensor.glances_hddtemp.PluginModel {
+  display_curse : bool
+  hddtemp
+  stats : list
+  update()
+}
+class "PluginModel" as glances.plugins.smart.PluginModel {
+  display_curse : bool
+  stats : list
+  get_key()
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.system.PluginModel {
+  display_curse : bool
+  stats : dict
+  system_info_msg : NoneType
+  add_human_readable_name(stats)
+  get_linux_version_and_distro()
+  get_stats_from_std_sys_lib(stats)
+  get_win_version_and_platform(stats)
+  msg_curse(args, max_width)
+  update()
+  update_stats_with_snmp()
+}
+class "PluginModel" as glances.plugins.uptime.PluginModel {
+  align : str
+  display_curse : bool
+  stats : str
+  uptime
+  get_export()
+  msg_curse(args, max_width)
+  update()
+}
+class "PluginModel" as glances.plugins.version.PluginModel {
+  stats : NoneType, str
+  reset()
+  update()
+}
+class "PluginModel" as glances.plugins.vms.PluginModel {
+  args : NoneType
+  config : NoneType
+  display_curse : bool
+  sort_key : NoneType, str
+  stats
+  watchers : Dict[str, VmsExtension]
+  get_export() -> List[Dict]
+  get_key() -> str
+  msg_curse(args, max_width: Optional[int]) -> List[str]
+  update() -> List[Dict]
+  update_views() -> bool
+  vm_alert(status: str) -> str
+}
+class "PluginModel" as glances.plugins.wifi.PluginModel {
+  display_curse : bool
+  stats
+  exit()
+  get_alert(value)
+  get_key()
+  msg_curse(args, max_width)
+  update()
+  update_views()
+}
+class "PodmanContainerStatsFetcher" as glances.plugins.containers.engines.podman.PodmanContainerStatsFetcher {
+  MANDATORY_FIELDS : list
+  activity_stats
+  time_since_update
+  get_streamed_stats() -> Dict[str, Any]
+  stop()
+}
+class "PodmanExtension" as glances.plugins.containers.engines.podman.PodmanExtension {
+  CONTAINER_ACTIVE_STATUS : list
+  client : NoneType
+  container_stats_fetchers : dict
+  ext_name : str
+  key
+  podman_sock
+  pods_stats_fetcher : NoneType
+  connect()
+  generate_stats(container) -> Dict[str, Any]
+  stop() -> None
+  update(all_tag) -> Tuple[Dict, list[Dict[str, Any]]]
+  update_version()
+}
+class "PodmanPodStatsFetcher" as glances.plugins.containers.engines.podman.PodmanPodStatsFetcher {
+  activity_stats
+  stop()
+}
+class "PublicIpInfo" as glances.plugins.ip.PublicIpInfo {
+  password
+  timeout : int
+  url
+  username
+  get()
+}
+class "SensorType" as glances.plugins.sensors.SensorType {
+  name
+}
+class "Sparkline" as glances.outputs.glances_sparklines.Sparkline {
+  available
+  percents
+  post_char
+  pre_char
+  size
+  get(overwrite)
+}
+class "ThreadOpenStack" as glances.plugins.cloud.ThreadOpenStack {
+  OPENSTACK_API_METADATA : dict
+  OPENSTACK_API_URL : str
+  OPENSTACK_PLATFORM : str
+  stats
+  run()
+  stop(timeout)
+  stopped()
+}
+class "ThreadOpenStackEC2" as glances.plugins.cloud.ThreadOpenStackEC2 {
+  OPENSTACK_API_METADATA : dict
+  OPENSTACK_API_URL : str
+  OPENSTACK_PLATFORM : str
+}
+class "ThreadScanner" as glances.plugins.ports.ThreadScanner {
+  plugin_name : str
+  stats
+  get_key()
+  run()
+  stop(timeout)
+  stopped()
+}
+class "ThreadedIterableStreamer" as glances.stats_streamer.ThreadedIterableStreamer {
+  last_update_time
+  result_lock : lock
+  stats
+  stop()
+  stopped()
+}
+class "Timer" as glances.timer.Timer {
+  duration
+  target
+  finished()
+  get()
+  reset(duration)
+  set(duration)
+  start()
+}
+class "VmExtension" as glances.plugins.vms.engines.multipass.VmExtension {
+  CONTAINER_ACTIVE_STATUS : list
+  ext_name : str
+  key
+  generate_stats(vm_name, vm_stats) -> Dict[str, Any]
+  update(all_tag) -> Tuple[Dict, List[Dict]]
+  update_info()
+  update_version()
+}
+class "VmsExtension" as glances.plugins.vms.engines.VmsExtension {
+  {abstract}stop() -> None
+  {abstract}update(all_tag) -> Tuple[Dict, List[Dict[str, Any]]]
+}
+class "_GlancesCurses" as glances.outputs.glances_curses._GlancesCurses {
+  args : NoneType
+  colors_list : dict
+  column : int
+  config : NoneType
+  decrease_nice_process : bool
+  edit_filter : bool
+  increase_nice_process : bool
+  kill_process : bool
+  line : int
+  next_column : int
+  next_line : int
+  pressedkey : int
+  reset_history_tag : bool
+  saved_line : int
+  screen
+  space_between_column : int
+  space_between_line : int
+  term_h : int
+  term_w : int
+  term_window
+  catch_actions_from_hotkey(hotkey)
+  catch_other_actions_maybe_return_to_browser(return_to_browser)
+  clear()
+  disable_fullquicklook()
+  disable_top()
+  display(stats, cs_status)
+  display_plugin(plugin_stats, display_optional, display_additional, max_y, add_space)
+  display_popup(message, size_x, size_y, duration, popup_type, input_size, input_value, is_password)
+  display_stats(plugin_stats, init, helper)
+  display_stats_with_current_size(m, y, x)
+  enable_fullquicklook()
+  enable_top()
+  end()
+  erase()
+  flush(stats, cs_status)
+  get_key(window)
+  get_next_x_and_x_max(m, x, x_max)
+  get_stats_display_height(curse_msg)
+  get_stats_display_width(curse_msg, without_option)
+  init_column()
+  init_line()
+  init_line_column()
+  kill(process)
+  load_config(config)
+  loop_position()
+  new_column()
+  new_line(separator)
+  nice_decrease(process)
+  nice_increase(process)
+  refresh()
+  separator_line(color)
+  set_cursor(value)
+  setup_upper_left_pos(plugin_stats)
+  update(stats, duration, cs_status, return_to_browser)
+  wait(delay)
+}
+class "_GlancesThreshold" as glances.thresholds._GlancesThreshold {
+  description()
+  value()
+}
+class "colors" as glances.outputs.glances_stdout_issue.colors {
+  BLUE : str
+  GREEN : str
+  NO : str
+  ORANGE : str
+  RED : str
+  disable()
+}
+glances.amps.default.Amp --|> glances.amps.amp.GlancesAmp
+glances.amps.nginx.Amp --|> glances.amps.amp.GlancesAmp
+glances.amps.systemd.Amp --|> glances.amps.amp.GlancesAmp
+glances.amps.systemv.Amp --|> glances.amps.amp.GlancesAmp
+glances.exports.glances_cassandra.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_couchdb.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_csv.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_elasticsearch.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_graph.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_graphite.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_influxdb.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_influxdb2.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_json.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_kafka.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_mongodb.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_mqtt.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_opentsdb.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_prometheus.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_rabbitmq.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_restful.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_riemann.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_statsd.Export --|> glances.exports.export.GlancesExport
+glances.exports.glances_zeromq.Export --|> glances.exports.export.GlancesExport
+glances.outputs.glances_curses.GlancesCursesClient --|> glances.outputs.glances_curses._GlancesCurses
+glances.outputs.glances_curses.GlancesCursesStandalone --|> glances.outputs.glances_curses._GlancesCurses
+glances.outputs.glances_curses_browser.GlancesCursesBrowser --|> glances.outputs.glances_curses._GlancesCurses
+glances.password_list.GlancesPasswordList --|> glances.password.GlancesPassword
+glances.plugins.alert.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.amps.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.cloud.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.cloud.ThreadOpenStackEC2 --|> glances.plugins.cloud.ThreadOpenStack
+glances.plugins.connections.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.containers.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.core.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.cpu.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.diskio.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.folders.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.fs.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.gpu.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.help.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.ip.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.irq.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.load.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.mem.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.memswap.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.network.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.now.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.percpu.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.ports.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.processcount.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.processlist.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.psutilversion.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.quicklook.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.raid.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.sensors.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.sensors.sensor.glances_batpercent.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.sensors.sensor.glances_hddtemp.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.smart.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.system.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.uptime.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.version.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.vms.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.plugins.wifi.PluginModel --|> glances.plugins.plugin.model.GlancesPluginModel
+glances.stats_client.GlancesStatsClient --|> glances.stats.GlancesStats
+glances.stats_client_snmp.GlancesStatsClientSNMP --|> glances.stats.GlancesStats
+glances.stats_server.GlancesStatsServer --|> glances.stats.GlancesStats
+glances.thresholds.GlancesThresholdCareful --|> glances.thresholds._GlancesThreshold
+glances.thresholds.GlancesThresholdCritical --|> glances.thresholds._GlancesThreshold
+glances.thresholds.GlancesThresholdOk --|> glances.thresholds._GlancesThreshold
+glances.thresholds.GlancesThresholdWarning --|> glances.thresholds._GlancesThreshold
+glances.actions.GlancesActions --* glances.plugins.plugin.model.GlancesPluginModel : actions
+glances.amps_list.AmpsList --* glances.plugins.amps.PluginModel : glances_amps
+glances.autodiscover.AutoDiscovered --* glances.autodiscover.GlancesAutoDiscoverListener : servers
+glances.autodiscover.GlancesAutoDiscoverClient --* glances.server.GlancesServer : autodiscover_client
+glances.autodiscover.GlancesAutoDiscoverListener --* glances.autodiscover.GlancesAutoDiscoverServer : listener
+glances.autodiscover.GlancesAutoDiscoverServer --* glances.client_browser.GlancesClientBrowser : autodiscover_server
+glances.config.Config --* glances.main.GlancesMain : config
+glances.cpu_percent.CpuInfo --* glances.cpu_percent.CpuPercent : cpu_info
+glances.filter.GlancesFilter --* glances.processes.GlancesProcesses : _filter
+glances.filter.GlancesFilterList --* glances.processes.GlancesProcesses : _filter_export
+glances.folder_list.FolderList --* glances.plugins.folders.PluginModel : glances_folders
+glances.history.GlancesHistory --* glances.plugins.plugin.model.GlancesPluginModel : stats_history
+glances.outdated.Outdated --* glances.standalone.GlancesStandalone : outdated
+glances.outputs.glances_curses.GlancesCursesClient --* glances.client.GlancesClient : screen
+glances.outputs.glances_curses.GlancesCursesStandalone --* glances.standalone.GlancesStandalone : screen
+glances.outputs.glances_curses_browser.GlancesCursesBrowser --* glances.client_browser.GlancesClientBrowser : screen
+glances.outputs.glances_restful_api.GlancesRestfulApi --* glances.webserver.GlancesWebServer : web
+glances.outputs.glances_restful_api.GlancesUvicornServer --* glances.outputs.glances_restful_api.GlancesRestfulApi : uvicorn_server
+glances.outputs.glances_stdout.GlancesStdout --* glances.standalone.GlancesStandalone : screen
+glances.outputs.glances_stdout_apidoc.GlancesStdoutApiDoc --* glances.standalone.GlancesStandalone : screen
+glances.outputs.glances_stdout_csv.GlancesStdoutCsv --* glances.standalone.GlancesStandalone : screen
+glances.outputs.glances_stdout_issue.GlancesStdoutIssue --* glances.standalone.GlancesStandalone : screen
+glances.outputs.glances_stdout_json.GlancesStdoutJson --* glances.standalone.GlancesStandalone : screen
+glances.password.GlancesPassword --* glances.outputs.glances_restful_api.GlancesRestfulApi : _password
+glances.password_list.GlancesPasswordList --* glances.client_browser.GlancesClientBrowser : password
+glances.plugins.cloud.ThreadOpenStack --* glances.plugins.cloud.PluginModel : OPENSTACK
+glances.plugins.cloud.ThreadOpenStackEC2 --* glances.plugins.cloud.PluginModel : OPENSTACKEC2
+glances.plugins.containers.engines.podman.PodmanPodStatsFetcher --* glances.plugins.containers.engines.podman.PodmanExtension : pods_stats_fetcher
+glances.plugins.gpu.cards.amd.AmdGPU --* glances.plugins.gpu.PluginModel : amd
+glances.plugins.gpu.cards.nvidia.NvidiaGPU --* glances.plugins.gpu.PluginModel : nvidia
+glances.plugins.irq.GlancesIRQ --* glances.plugins.irq.PluginModel : irq
+glances.plugins.ports.ThreadScanner --* glances.plugins.ports.PluginModel : _thread
+glances.plugins.sensors.sensor.glances_batpercent.GlancesGrabBat --* glances.plugins.sensors.sensor.glances_batpercent.PluginModel : glances_grab_bat
+glances.plugins.sensors.sensor.glances_hddtemp.GlancesGrabHDDTemp --* glances.plugins.sensors.sensor.glances_hddtemp.PluginModel : hddtemp
+glances.server.GlancesXMLRPCServer --* glances.server.GlancesServer : server
+glances.static_list.GlancesStaticServer --* glances.client_browser.GlancesClientBrowser : static_server
+glances.stats.GlancesStats --* glances.standalone.GlancesStandalone : stats
+glances.stats.GlancesStats --* glances.webserver.GlancesWebServer : stats
+glances.stats_client.GlancesStatsClient --* glances.client.GlancesClient : stats
+glances.stats_client_snmp.GlancesStatsClientSNMP --* glances.client.GlancesClient : stats
+glances.stats_server.GlancesStatsServer --* glances.server.GlancesInstance : stats
+glances.stats_streamer.ThreadedIterableStreamer --* glances.plugins.containers.engines.docker.DockerStatsFetcher : _streamer
+glances.stats_streamer.ThreadedIterableStreamer --* glances.plugins.containers.engines.podman.PodmanContainerStatsFetcher : _streamer
+glances.stats_streamer.ThreadedIterableStreamer --* glances.plugins.containers.engines.podman.PodmanPodStatsFetcher : _streamer
+glances.timer.Timer --* glances.actions.GlancesActions : start_timer
+glances.timer.Timer --* glances.actions.GlancesActions : start_timer
+glances.timer.Timer --* glances.amps.amp.GlancesAmp : timer
+glances.timer.Timer --* glances.cpu_percent.CpuPercent : timer_cpu_info
+glances.timer.Timer --* glances.cpu_percent.CpuPercent : timer_cpu
+glances.timer.Timer --* glances.cpu_percent.CpuPercent : timer_percpu
+glances.timer.Timer --* glances.exports.glances_graph.Export : _timer
+glances.timer.Timer --* glances.outputs.glances_restful_api.GlancesRestfulApi : timer
+glances.timer.Timer --* glances.outputs.glances_restful_api.GlancesRestfulApi : timer
+glances.timer.Timer --* glances.plugins.plugin.model.GlancesPluginModel : refresh_timer
+glances.timer.Timer --* glances.processes.GlancesProcesses : cache_timer
+glances.timer.Timer --* glances.processes.GlancesProcesses : cache_timer
+glances.timer.Timer --* glances.server.GlancesInstance : timer
+glances.timer.Timer --* glances.server.GlancesInstance : timer
+glances.stats.GlancesStats --o glances.outputs.glances_restful_api.GlancesRestfulApi : stats
+@enduml

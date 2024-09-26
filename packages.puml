@@ -1,0 +1,591 @@
+@startuml packages
+set namespaceSeparator none
+package "glances" as glances {
+}
+package "glances.__main__" as glances.__main__ {
+}
+package "glances.actions" as glances.actions {
+}
+package "glances.amps" as glances.amps {
+}
+package "glances.amps.amp" as glances.amps.amp {
+}
+package "glances.amps.default" as glances.amps.default {
+}
+package "glances.amps.nginx" as glances.amps.nginx {
+}
+package "glances.amps.systemd" as glances.amps.systemd {
+}
+package "glances.amps.systemv" as glances.amps.systemv {
+}
+package "glances.amps_list" as glances.amps_list {
+}
+package "glances.attribute" as glances.attribute {
+}
+package "glances.autodiscover" as glances.autodiscover {
+}
+package "glances.client" as glances.client {
+}
+package "glances.client_browser" as glances.client_browser {
+}
+package "glances.config" as glances.config {
+}
+package "glances.cpu_percent" as glances.cpu_percent {
+}
+package "glances.event" as glances.event {
+}
+package "glances.events_list" as glances.events_list {
+}
+package "glances.exports" as glances.exports {
+}
+package "glances.exports.export" as glances.exports.export {
+}
+package "glances.exports.glances_cassandra" as glances.exports.glances_cassandra {
+}
+package "glances.exports.glances_couchdb" as glances.exports.glances_couchdb {
+}
+package "glances.exports.glances_csv" as glances.exports.glances_csv {
+}
+package "glances.exports.glances_elasticsearch" as glances.exports.glances_elasticsearch {
+}
+package "glances.exports.glances_graph" as glances.exports.glances_graph {
+}
+package "glances.exports.glances_graphite" as glances.exports.glances_graphite {
+}
+package "glances.exports.glances_influxdb" as glances.exports.glances_influxdb {
+}
+package "glances.exports.glances_influxdb2" as glances.exports.glances_influxdb2 {
+}
+package "glances.exports.glances_json" as glances.exports.glances_json {
+}
+package "glances.exports.glances_kafka" as glances.exports.glances_kafka {
+}
+package "glances.exports.glances_mongodb" as glances.exports.glances_mongodb {
+}
+package "glances.exports.glances_mqtt" as glances.exports.glances_mqtt {
+}
+package "glances.exports.glances_opentsdb" as glances.exports.glances_opentsdb {
+}
+package "glances.exports.glances_prometheus" as glances.exports.glances_prometheus {
+}
+package "glances.exports.glances_rabbitmq" as glances.exports.glances_rabbitmq {
+}
+package "glances.exports.glances_restful" as glances.exports.glances_restful {
+}
+package "glances.exports.glances_riemann" as glances.exports.glances_riemann {
+}
+package "glances.exports.glances_statsd" as glances.exports.glances_statsd {
+}
+package "glances.exports.glances_zeromq" as glances.exports.glances_zeromq {
+}
+package "glances.filter" as glances.filter {
+}
+package "glances.folder_list" as glances.folder_list {
+}
+package "glances.globals" as glances.globals {
+}
+package "glances.history" as glances.history {
+}
+package "glances.logger" as glances.logger {
+}
+package "glances.main" as glances.main {
+}
+package "glances.outdated" as glances.outdated {
+}
+package "glances.outputs" as glances.outputs {
+}
+package "glances.outputs.glances_bars" as glances.outputs.glances_bars {
+}
+package "glances.outputs.glances_colors" as glances.outputs.glances_colors {
+}
+package "glances.outputs.glances_curses" as glances.outputs.glances_curses {
+}
+package "glances.outputs.glances_curses_browser" as glances.outputs.glances_curses_browser {
+}
+package "glances.outputs.glances_restful_api" as glances.outputs.glances_restful_api {
+}
+package "glances.outputs.glances_sparklines" as glances.outputs.glances_sparklines {
+}
+package "glances.outputs.glances_stdout" as glances.outputs.glances_stdout {
+}
+package "glances.outputs.glances_stdout_apidoc" as glances.outputs.glances_stdout_apidoc {
+}
+package "glances.outputs.glances_stdout_csv" as glances.outputs.glances_stdout_csv {
+}
+package "glances.outputs.glances_stdout_issue" as glances.outputs.glances_stdout_issue {
+}
+package "glances.outputs.glances_stdout_json" as glances.outputs.glances_stdout_json {
+}
+package "glances.outputs.glances_unicode" as glances.outputs.glances_unicode {
+}
+package "glances.password" as glances.password {
+}
+package "glances.password_list" as glances.password_list {
+}
+package "glances.plugins" as glances.plugins {
+}
+package "glances.plugins.__pycache__" as glances.plugins.__pycache__ {
+}
+package "glances.plugins.alert" as glances.plugins.alert {
+}
+package "glances.plugins.amps" as glances.plugins.amps {
+}
+package "glances.plugins.cloud" as glances.plugins.cloud {
+}
+package "glances.plugins.connections" as glances.plugins.connections {
+}
+package "glances.plugins.containers" as glances.plugins.containers {
+}
+package "glances.plugins.containers.engines" as glances.plugins.containers.engines {
+}
+package "glances.plugins.containers.engines.docker" as glances.plugins.containers.engines.docker {
+}
+package "glances.plugins.containers.engines.podman" as glances.plugins.containers.engines.podman {
+}
+package "glances.plugins.core" as glances.plugins.core {
+}
+package "glances.plugins.cpu" as glances.plugins.cpu {
+}
+package "glances.plugins.diskio" as glances.plugins.diskio {
+}
+package "glances.plugins.folders" as glances.plugins.folders {
+}
+package "glances.plugins.fs" as glances.plugins.fs {
+}
+package "glances.plugins.gpu" as glances.plugins.gpu {
+}
+package "glances.plugins.gpu.cards" as glances.plugins.gpu.cards {
+}
+package "glances.plugins.gpu.cards.amd" as glances.plugins.gpu.cards.amd {
+}
+package "glances.plugins.gpu.cards.nvidia" as glances.plugins.gpu.cards.nvidia {
+}
+package "glances.plugins.help" as glances.plugins.help {
+}
+package "glances.plugins.ip" as glances.plugins.ip {
+}
+package "glances.plugins.irq" as glances.plugins.irq {
+}
+package "glances.plugins.load" as glances.plugins.load {
+}
+package "glances.plugins.mem" as glances.plugins.mem {
+}
+package "glances.plugins.memswap" as glances.plugins.memswap {
+}
+package "glances.plugins.network" as glances.plugins.network {
+}
+package "glances.plugins.now" as glances.plugins.now {
+}
+package "glances.plugins.percpu" as glances.plugins.percpu {
+}
+package "glances.plugins.plugin" as glances.plugins.plugin {
+}
+package "glances.plugins.plugin.model" as glances.plugins.plugin.model {
+}
+package "glances.plugins.ports" as glances.plugins.ports {
+}
+package "glances.plugins.processcount" as glances.plugins.processcount {
+}
+package "glances.plugins.processlist" as glances.plugins.processlist {
+}
+package "glances.plugins.psutilversion" as glances.plugins.psutilversion {
+}
+package "glances.plugins.quicklook" as glances.plugins.quicklook {
+}
+package "glances.plugins.raid" as glances.plugins.raid {
+}
+package "glances.plugins.sensors" as glances.plugins.sensors {
+}
+package "glances.plugins.sensors.sensor" as glances.plugins.sensors.sensor {
+}
+package "glances.plugins.sensors.sensor.glances_batpercent" as glances.plugins.sensors.sensor.glances_batpercent {
+}
+package "glances.plugins.sensors.sensor.glances_hddtemp" as glances.plugins.sensors.sensor.glances_hddtemp {
+}
+package "glances.plugins.smart" as glances.plugins.smart {
+}
+package "glances.plugins.system" as glances.plugins.system {
+}
+package "glances.plugins.uptime" as glances.plugins.uptime {
+}
+package "glances.plugins.version" as glances.plugins.version {
+}
+package "glances.plugins.vms" as glances.plugins.vms {
+}
+package "glances.plugins.vms.engines" as glances.plugins.vms.engines {
+}
+package "glances.plugins.vms.engines.multipass" as glances.plugins.vms.engines.multipass {
+}
+package "glances.plugins.wifi" as glances.plugins.wifi {
+}
+package "glances.ports_list" as glances.ports_list {
+}
+package "glances.processes" as glances.processes {
+}
+package "glances.programs" as glances.programs {
+}
+package "glances.secure" as glances.secure {
+}
+package "glances.server" as glances.server {
+}
+package "glances.snmp" as glances.snmp {
+}
+package "glances.standalone" as glances.standalone {
+}
+package "glances.static_list" as glances.static_list {
+}
+package "glances.stats" as glances.stats {
+}
+package "glances.stats_client" as glances.stats_client {
+}
+package "glances.stats_client_snmp" as glances.stats_client_snmp {
+}
+package "glances.stats_server" as glances.stats_server {
+}
+package "glances.stats_streamer" as glances.stats_streamer {
+}
+package "glances.thresholds" as glances.thresholds {
+}
+package "glances.timer" as glances.timer {
+}
+package "glances.web_list" as glances.web_list {
+}
+package "glances.webserver" as glances.webserver {
+}
+glances --> glances.logger
+glances --> glances.main
+glances --> glances.standalone
+glances --> glances.timer
+glances.__main__ --> glances
+glances.actions --> glances.logger
+glances.actions --> glances.secure
+glances.actions --> glances.timer
+glances.amps.amp --> glances.globals
+glances.amps.amp --> glances.logger
+glances.amps.amp --> glances.timer
+glances.amps.default --> glances.amps.amp
+glances.amps.default --> glances.logger
+glances.amps.default --> glances.secure
+glances.amps.nginx --> glances.amps.amp
+glances.amps.nginx --> glances.logger
+glances.amps.systemd --> glances.amps.amp
+glances.amps.systemd --> glances.globals
+glances.amps.systemd --> glances.logger
+glances.amps.systemv --> glances.amps.amp
+glances.amps.systemv --> glances.globals
+glances.amps.systemv --> glances.logger
+glances.amps.systemv --> glances.secure
+glances.amps_list --> glances.globals
+glances.amps_list --> glances.logger
+glances.amps_list --> glances.processes
+glances.autodiscover --> glances.globals
+glances.autodiscover --> glances.logger
+glances.client --> glances
+glances.client --> glances.globals
+glances.client --> glances.logger
+glances.client --> glances.outputs.glances_curses
+glances.client --> glances.stats_client
+glances.client --> glances.stats_client_snmp
+glances.client --> glances.timer
+glances.client_browser --> glances.autodiscover
+glances.client_browser --> glances.client
+glances.client_browser --> glances.globals
+glances.client_browser --> glances.logger
+glances.client_browser --> glances.outputs.glances_curses_browser
+glances.client_browser --> glances.password_list
+glances.client_browser --> glances.static_list
+glances.config --> glances.globals
+glances.config --> glances.logger
+glances.cpu_percent --> glances.logger
+glances.cpu_percent --> glances.timer
+glances.event --> glances.logger
+glances.event --> glances.processes
+glances.events_list --> glances.event
+glances.events_list --> glances.processes
+glances.events_list --> glances.thresholds
+glances.exports.export --> glances.globals
+glances.exports.export --> glances.logger
+glances.exports.export --> glances.timer
+glances.exports.glances_cassandra --> glances.exports.export
+glances.exports.glances_cassandra --> glances.logger
+glances.exports.glances_couchdb --> glances.exports.export
+glances.exports.glances_couchdb --> glances.logger
+glances.exports.glances_csv --> glances.exports.export
+glances.exports.glances_csv --> glances.logger
+glances.exports.glances_elasticsearch --> glances.exports.export
+glances.exports.glances_elasticsearch --> glances.logger
+glances.exports.glances_graph --> glances.exports.export
+glances.exports.glances_graph --> glances.globals
+glances.exports.glances_graph --> glances.logger
+glances.exports.glances_graph --> glances.timer
+glances.exports.glances_graphite --> glances.exports.export
+glances.exports.glances_graphite --> glances.logger
+glances.exports.glances_influxdb --> glances.exports.export
+glances.exports.glances_influxdb --> glances.logger
+glances.exports.glances_influxdb2 --> glances.exports.export
+glances.exports.glances_influxdb2 --> glances.logger
+glances.exports.glances_json --> glances.exports.export
+glances.exports.glances_json --> glances.globals
+glances.exports.glances_json --> glances.logger
+glances.exports.glances_kafka --> glances.exports.export
+glances.exports.glances_kafka --> glances.globals
+glances.exports.glances_kafka --> glances.logger
+glances.exports.glances_mongodb --> glances.exports.export
+glances.exports.glances_mongodb --> glances.logger
+glances.exports.glances_mqtt --> glances.exports.export
+glances.exports.glances_mqtt --> glances.globals
+glances.exports.glances_mqtt --> glances.logger
+glances.exports.glances_opentsdb --> glances.exports.export
+glances.exports.glances_opentsdb --> glances.logger
+glances.exports.glances_prometheus --> glances.exports.export
+glances.exports.glances_prometheus --> glances.globals
+glances.exports.glances_prometheus --> glances.logger
+glances.exports.glances_rabbitmq --> glances.exports.export
+glances.exports.glances_rabbitmq --> glances.logger
+glances.exports.glances_restful --> glances.exports.export
+glances.exports.glances_restful --> glances.globals
+glances.exports.glances_restful --> glances.logger
+glances.exports.glances_riemann --> glances.exports.export
+glances.exports.glances_riemann --> glances.logger
+glances.exports.glances_statsd --> glances.exports.export
+glances.exports.glances_statsd --> glances.logger
+glances.exports.glances_zeromq --> glances.exports.export
+glances.exports.glances_zeromq --> glances.globals
+glances.exports.glances_zeromq --> glances.logger
+glances.filter --> glances.logger
+glances.folder_list --> glances.globals
+glances.folder_list --> glances.logger
+glances.folder_list --> glances.timer
+glances.history --> glances.attribute
+glances.logger --> glances.globals
+glances.main --> glances
+glances.main --> glances.config
+glances.main --> glances.globals
+glances.main --> glances.logger
+glances.main --> glances.password
+glances.main --> glances.processes
+glances.outdated --> glances
+glances.outdated --> glances.config
+glances.outdated --> glances.globals
+glances.outdated --> glances.logger
+glances.outputs.glances_colors --> glances.logger
+glances.outputs.glances_curses --> glances.events_list
+glances.outputs.glances_curses --> glances.globals
+glances.outputs.glances_curses --> glances.logger
+glances.outputs.glances_curses --> glances.outputs.glances_colors
+glances.outputs.glances_curses --> glances.outputs.glances_unicode
+glances.outputs.glances_curses --> glances.processes
+glances.outputs.glances_curses --> glances.timer
+glances.outputs.glances_curses_browser --> glances.logger
+glances.outputs.glances_curses_browser --> glances.outputs.glances_curses
+glances.outputs.glances_curses_browser --> glances.timer
+glances.outputs.glances_restful_api --> glances
+glances.outputs.glances_restful_api --> glances.globals
+glances.outputs.glances_restful_api --> glances.logger
+glances.outputs.glances_restful_api --> glances.password
+glances.outputs.glances_restful_api --> glances.stats
+glances.outputs.glances_restful_api --> glances.timer
+glances.outputs.glances_sparklines --> glances.globals
+glances.outputs.glances_sparklines --> glances.logger
+glances.outputs.glances_stdout --> glances.globals
+glances.outputs.glances_stdout --> glances.logger
+glances.outputs.glances_stdout_apidoc --> glances
+glances.outputs.glances_stdout_apidoc --> glances.globals
+glances.outputs.glances_stdout_apidoc --> glances.logger
+glances.outputs.glances_stdout_csv --> glances.globals
+glances.outputs.glances_stdout_issue --> glances
+glances.outputs.glances_stdout_issue --> glances.timer
+glances.outputs.glances_stdout_json --> glances.globals
+glances.password --> glances.config
+glances.password --> glances.globals
+glances.password --> glances.logger
+glances.password_list --> glances.logger
+glances.password_list --> glances.password
+glances.plugins.alert --> glances.events_list
+glances.plugins.alert --> glances.plugins.plugin.model
+glances.plugins.amps --> glances.amps_list
+glances.plugins.amps --> glances.globals
+glances.plugins.amps --> glances.plugins.plugin.model
+glances.plugins.cloud --> glances.globals
+glances.plugins.cloud --> glances.logger
+glances.plugins.cloud --> glances.plugins.plugin.model
+glances.plugins.connections --> glances.globals
+glances.plugins.connections --> glances.logger
+glances.plugins.connections --> glances.plugins.plugin.model
+glances.plugins.containers --> glances.globals
+glances.plugins.containers --> glances.logger
+glances.plugins.containers --> glances.plugins.containers.engines
+glances.plugins.containers --> glances.plugins.containers.engines.docker
+glances.plugins.containers --> glances.plugins.containers.engines.podman
+glances.plugins.containers --> glances.plugins.plugin.model
+glances.plugins.containers --> glances.processes
+glances.plugins.containers.engines.docker --> glances.globals
+glances.plugins.containers.engines.docker --> glances.logger
+glances.plugins.containers.engines.docker --> glances.stats_streamer
+glances.plugins.containers.engines.podman --> glances.globals
+glances.plugins.containers.engines.podman --> glances.logger
+glances.plugins.containers.engines.podman --> glances.plugins.containers.engines.podman
+glances.plugins.containers.engines.podman --> glances.stats_streamer
+glances.plugins.core --> glances.plugins.plugin.model
+glances.plugins.cpu --> glances.cpu_percent
+glances.plugins.cpu --> glances.globals
+glances.plugins.cpu --> glances.plugins.core
+glances.plugins.cpu --> glances.plugins.plugin.model
+glances.plugins.diskio --> glances.globals
+glances.plugins.diskio --> glances.logger
+glances.plugins.diskio --> glances.plugins.plugin.model
+glances.plugins.folders --> glances.folder_list
+glances.plugins.folders --> glances.globals
+glances.plugins.folders --> glances.logger
+glances.plugins.folders --> glances.plugins.plugin.model
+glances.plugins.fs --> glances.globals
+glances.plugins.fs --> glances.logger
+glances.plugins.fs --> glances.plugins.plugin.model
+glances.plugins.gpu --> glances.globals
+glances.plugins.gpu --> glances.plugins.gpu.cards.amd
+glances.plugins.gpu --> glances.plugins.gpu.cards.nvidia
+glances.plugins.gpu --> glances.plugins.plugin.model
+glances.plugins.gpu.cards.nvidia --> glances.globals
+glances.plugins.gpu.cards.nvidia --> glances.logger
+glances.plugins.help --> glances
+glances.plugins.help --> glances.globals
+glances.plugins.help --> glances.plugins.plugin.model
+glances.plugins.ip --> glances.globals
+glances.plugins.ip --> glances.logger
+glances.plugins.ip --> glances.plugins.plugin.model
+glances.plugins.ip --> glances.timer
+glances.plugins.irq --> glances.globals
+glances.plugins.irq --> glances.logger
+glances.plugins.irq --> glances.plugins.plugin.model
+glances.plugins.irq --> glances.timer
+glances.plugins.load --> glances.globals
+glances.plugins.load --> glances.logger
+glances.plugins.load --> glances.plugins.core
+glances.plugins.load --> glances.plugins.plugin.model
+glances.plugins.mem --> glances.plugins.plugin.model
+glances.plugins.memswap --> glances.globals
+glances.plugins.memswap --> glances.plugins.plugin.model
+glances.plugins.memswap --> glances.timer
+glances.plugins.network --> glances.logger
+glances.plugins.network --> glances.plugins.plugin.model
+glances.plugins.now --> glances.plugins.plugin.model
+glances.plugins.percpu --> glances.cpu_percent
+glances.plugins.percpu --> glances.globals
+glances.plugins.percpu --> glances.plugins.plugin.model
+glances.plugins.plugin.model --> glances.actions
+glances.plugins.plugin.model --> glances.events_list
+glances.plugins.plugin.model --> glances.globals
+glances.plugins.plugin.model --> glances.history
+glances.plugins.plugin.model --> glances.logger
+glances.plugins.plugin.model --> glances.outputs.glances_unicode
+glances.plugins.plugin.model --> glances.snmp
+glances.plugins.plugin.model --> glances.thresholds
+glances.plugins.plugin.model --> glances.timer
+glances.plugins.ports --> glances.globals
+glances.plugins.ports --> glances.logger
+glances.plugins.ports --> glances.plugins.plugin.model
+glances.plugins.ports --> glances.ports_list
+glances.plugins.ports --> glances.timer
+glances.plugins.ports --> glances.web_list
+glances.plugins.processcount --> glances.plugins.plugin.model
+glances.plugins.processcount --> glances.processes
+glances.plugins.processlist --> glances.globals
+glances.plugins.processlist --> glances.logger
+glances.plugins.processlist --> glances.outputs.glances_unicode
+glances.plugins.processlist --> glances.plugins.core
+glances.plugins.processlist --> glances.plugins.plugin.model
+glances.plugins.processlist --> glances.processes
+glances.plugins.psutilversion --> glances
+glances.plugins.psutilversion --> glances.plugins.plugin.model
+glances.plugins.quicklook --> glances.cpu_percent
+glances.plugins.quicklook --> glances.logger
+glances.plugins.quicklook --> glances.outputs.glances_bars
+glances.plugins.quicklook --> glances.outputs.glances_sparklines
+glances.plugins.quicklook --> glances.plugins.load
+glances.plugins.quicklook --> glances.plugins.plugin.model
+glances.plugins.raid --> glances.globals
+glances.plugins.raid --> glances.logger
+glances.plugins.raid --> glances.plugins.plugin.model
+glances.plugins.sensors --> glances.globals
+glances.plugins.sensors --> glances.logger
+glances.plugins.sensors --> glances.outputs.glances_unicode
+glances.plugins.sensors --> glances.plugins.plugin.model
+glances.plugins.sensors --> glances.plugins.sensors.sensor.glances_batpercent
+glances.plugins.sensors --> glances.plugins.sensors.sensor.glances_hddtemp
+glances.plugins.sensors --> glances.timer
+glances.plugins.sensors.sensor.glances_batpercent --> glances.globals
+glances.plugins.sensors.sensor.glances_batpercent --> glances.logger
+glances.plugins.sensors.sensor.glances_batpercent --> glances.plugins.plugin.model
+glances.plugins.sensors.sensor.glances_hddtemp --> glances.globals
+glances.plugins.sensors.sensor.glances_hddtemp --> glances.logger
+glances.plugins.sensors.sensor.glances_hddtemp --> glances.plugins.plugin.model
+glances.plugins.smart --> glances.globals
+glances.plugins.smart --> glances.logger
+glances.plugins.smart --> glances.main
+glances.plugins.smart --> glances.plugins.plugin.model
+glances.plugins.system --> glances.globals
+glances.plugins.system --> glances.logger
+glances.plugins.system --> glances.plugins.plugin.model
+glances.plugins.uptime --> glances.plugins.plugin.model
+glances.plugins.version --> glances
+glances.plugins.version --> glances.plugins.plugin.model
+glances.plugins.vms --> glances.globals
+glances.plugins.vms --> glances.logger
+glances.plugins.vms --> glances.plugins.plugin.model
+glances.plugins.vms --> glances.plugins.vms.engines
+glances.plugins.vms --> glances.plugins.vms.engines.multipass
+glances.plugins.vms --> glances.processes
+glances.plugins.vms.engines.multipass --> glances.globals
+glances.plugins.vms.engines.multipass --> glances.secure
+glances.plugins.wifi --> glances.globals
+glances.plugins.wifi --> glances.logger
+glances.plugins.wifi --> glances.plugins.plugin.model
+glances.ports_list --> glances.globals
+glances.ports_list --> glances.logger
+glances.processes --> glances.filter
+glances.processes --> glances.globals
+glances.processes --> glances.logger
+glances.processes --> glances.programs
+glances.processes --> glances.timer
+glances.secure --> glances.globals
+glances.server --> glances
+glances.server --> glances.autodiscover
+glances.server --> glances.globals
+glances.server --> glances.logger
+glances.server --> glances.password
+glances.server --> glances.stats_server
+glances.server --> glances.timer
+glances.snmp --> glances.logger
+glances.standalone --> glances.globals
+glances.standalone --> glances.logger
+glances.standalone --> glances.outdated
+glances.standalone --> glances.outputs.glances_curses
+glances.standalone --> glances.outputs.glances_stdout
+glances.standalone --> glances.outputs.glances_stdout_apidoc
+glances.standalone --> glances.outputs.glances_stdout_csv
+glances.standalone --> glances.outputs.glances_stdout_issue
+glances.standalone --> glances.outputs.glances_stdout_json
+glances.standalone --> glances.processes
+glances.standalone --> glances.stats
+glances.standalone --> glances.timer
+glances.static_list --> glances.logger
+glances.stats --> glances.globals
+glances.stats --> glances.logger
+glances.stats --> glances.timer
+glances.stats_client --> glances.globals
+glances.stats_client --> glances.logger
+glances.stats_client --> glances.stats
+glances.stats_client_snmp --> glances.globals
+glances.stats_client_snmp --> glances.logger
+glances.stats_client_snmp --> glances.snmp
+glances.stats_client_snmp --> glances.stats
+glances.stats_server --> glances.logger
+glances.stats_server --> glances.stats
+glances.stats_streamer --> glances.logger
+glances.web_list --> glances.globals
+glances.web_list --> glances.logger
+glances.webserver --> glances.globals
+glances.webserver --> glances.outputs.glances_restful_api
+glances.webserver --> glances.processes
+glances.webserver --> glances.stats
+@enduml
